@@ -1,27 +1,29 @@
-// SPDX-License-Identifier: MIT 
+// SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
 contract Calculator {
-  constructor()  public {
-  }
+    constructor() public {}
 
-  // Add two numbers together
-  function add(uint256 a, uint256 b) public pure  returns (uint256) {
-    return a + b;
-  }
+    uint256 public result;
 
-  // Subtract one number from another
-  function subtract(uint256 a, uint256 b) public pure returns (uint256) {
-    return a - b;
-  }
+    function add(uint256 a, uint256 b) public {
+        result = a + b;
+    }
 
-  // Multiply two numbers together
-  function multiply(uint256 a, uint256 b) public pure returns (uint256) {
-    return a * b;
-  }
+    function subtract(uint256 a, uint256 b) public {
+        result = a - b;
+    }
 
-  // Divide one number by another
-  function divide(uint256 a, uint256 b) public pure returns (uint256) {
-    return a / b;
-  }
+    function multiply(uint256 a, uint256 b) public {
+        result = a * b;
+    }
+
+    function divide(uint256 a, uint256 b) public {
+        require(b != 0, "Division by zero");
+        result = a / b;
+    }
+
+    function getResult() public view returns (uint256) {
+        return result;
+    }
 }
