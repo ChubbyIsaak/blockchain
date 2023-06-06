@@ -1,31 +1,43 @@
 const Calculator = artifacts.require("Calculator");
 
 contract("Calculator", (accounts) => {
-    it("should add two numbers", async () => {
+    it("should perform calculations and check min/max numbers", async () => {
         const calculator = await Calculator.deployed();
+
+        // Addition
         await calculator.add(5, 10);
-        const result = await calculator.getResult();
+        let result = await calculator.getResult();
+        let maxNumber = await calculator.maxNumber();
+        let minNumber = await calculator.minNumber();
         console.log("Addition Result:", result.toString());
-    });
+        console.log("Max Number:", maxNumber.toString());
+        console.log("Min Number:", minNumber.toString());
 
-    it("should subtract two numbers", async () => {
-        const calculator = await Calculator.deployed();
+        // Subtraction
         await calculator.subtract(15, 7);
-        const result = await calculator.getResult();
+        result = await calculator.getResult();
+        maxNumber = await calculator.maxNumber();
+        minNumber = await calculator.minNumber();
         console.log("Subtraction Result:", result.toString());
-    });
+        console.log("Max Number:", maxNumber.toString());
+        console.log("Min Number:", minNumber.toString());
 
-    it("should multiply two numbers", async () => {
-        const calculator = await Calculator.deployed();
+        // Multiplication
         await calculator.multiply(3, 6);
-        const result = await calculator.getResult();
+        result = await calculator.getResult();
+        maxNumber = await calculator.maxNumber();
+        minNumber = await calculator.minNumber();
         console.log("Multiplication Result:", result.toString());
-    });
+        console.log("Max Number:", maxNumber.toString());
+        console.log("Min Number:", minNumber.toString());
 
-    it("should divide two numbers", async () => {
-        const calculator = await Calculator.deployed();
+        // Division
         await calculator.divide(20, 4);
-        const result = await calculator.getResult();
+        result = await calculator.getResult();
+        maxNumber = await calculator.maxNumber();
+        minNumber = await calculator.minNumber();
         console.log("Division Result:", result.toString());
+        console.log("Max Number:", maxNumber.toString());
+        console.log("Min Number:", minNumber.toString());
     });
 });
