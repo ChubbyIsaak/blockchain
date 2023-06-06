@@ -1,192 +1,153 @@
-
-async function add() {
-    const number1 = document.getElementById("number1").value;
-    const number2 = document.getElementById("number2").value;
-    await callContractFunction('add', [number1, number2]);
-}
-
-async function subtract() {
-    const number1 = document.getElementById("number1").value;
-    const number2 = document.getElementById("number2").value;
-    await callContractFunction('subtract', [number1, number2]);
-}
-
-async function multiply() {
-    const number1 = document.getElementById("number1").value;
-    const number2 = document.getElementById("number2").value;
-    await callContractFunction('multiply', [number1, number2]);
-}
-
-async function divide() {
-    const number1 = document.getElementById("number1").value;
-    const number2 = document.getElementById("number2").value;
-    await callContractFunction('divide', [number1, number2]);
-}
-async function callContractFunction(functionName, params) {
-    const Web3 = require('web3');
-
-    // Establece la dirección del contrato y el ABI
-    const contractAddress = '0x5cd3d50e94ffb770e97c2fb7098436d939dc52d62e62d4a9b486f83d640d21b3';
-    const contractAbi = [
-        {
-            "inputs": [],
-            "stateMutability": "nonpayable",
-            "type": "constructor"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "a",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "b",
-                    "type": "uint256"
-                }
-            ],
-            "name": "add",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "a",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "b",
-                    "type": "uint256"
-                }
-            ],
-            "name": "divide",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "getResult",
-            "outputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "maxNumber",
-            "outputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "minNumber",
-            "outputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "a",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "b",
-                    "type": "uint256"
-                }
-            ],
-            "name": "multiply",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "result",
-            "outputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "a",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "b",
-                    "type": "uint256"
-                }
-            ],
-            "name": "subtract",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        }
-    ];
-
-    // Crea una instancia de Web3
-    const web3 = new Web3('http://127.0.0.1:7545');
-    // Crea una instancia del contrato
-    const contract = new web3.eth.Contract(contractAbi, contractAddress);
-
-    async function callContractFunction(functionName, params) {
-        try {
-            const accounts = await web3.eth.getAccounts();
-            const account = accounts[0];
-
-            // Realiza la llamada a la función del contrato
-            const result = await contract.methods[functionName](...params).send({ from: account });
-
-            console.log(result);
-            // Hacer algo con el resultado de la llamada al contrato
-        } catch (error) {
-            console.error(error);
-            // Manejar el error
-        }
+const contractAddress = '0x3d7e6074c3aE893A63Be0334F04E0b48138737aD';
+const contractAbi = [
+    {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "a",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "b",
+                "type": "uint256"
+            }
+        ],
+        "name": "add",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "a",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "b",
+                "type": "uint256"
+            }
+        ],
+        "name": "subtract",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "a",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "b",
+                "type": "uint256"
+            }
+        ],
+        "name": "multiply",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "a",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "b",
+                "type": "uint256"
+            }
+        ],
+        "name": "divide",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
     }
+];
+
+// Crea una instancia de Web3
+const web3 = new Web3('http://127.0.0.1:7545');
+// Crea una instancia del contrato
+const calculatorContract = new web3.eth.Contract(contractAbi, contractAddress);
+
+function add() {
+    const number1 = parseInt(document.getElementById('number1').value);
+    const number2 = parseInt(document.getElementById('number2').value);
+
+    const options = {
+        from: '0x5692614fC1a969759a8F307c3847758E2Bf4E5e7' // Reemplaza '0xYourAddressHere' con tu dirección Ethereum válida
+    };
+
+    calculatorContract.methods.add(number1, number2).send(options)
+        .then(() => {
+            document.getElementById('result').textContent = 'Addition successful';
+        })
+        .catch((error) => {
+            document.getElementById('error').textContent = 'Error: ' + error.message;
+        });
 }
 
-try {
-    const result = await contractInstance.methods[functionName](...params).call();
-    document.getElementById("result").innerText = `Result: ${result}`;
-    document.getElementById("error").innerText = '';
-} catch (error) {
-    document.getElementById("result").innerText = '';
-    document.getElementById("error").innerText = error.message;
+function subtract() {
+    const number1 = parseInt(document.getElementById('number1').value);
+    const number2 = parseInt(document.getElementById('number2').value);
+
+    const options = {
+        from: '0x48331AF1dF570C1d05E8230c0110644B284f7B1D' // Reemplaza '0xYourAddressHere' con tu dirección Ethereum válida
+    };
+
+    calculatorContract.methods.subtract(number1, number2).send(options)
+        .then(() => {
+            document.getElementById('result').textContent = 'Subtraction successful';
+        })
+        .catch((error) => {
+            document.getElementById('error').textContent = 'Error: ' + error.message;
+        });
 }
 
+function multiply() {
+    const number1 = parseInt(document.getElementById('number1').value);
+    const number2 = parseInt(document.getElementById('number2').value);
+
+    const options = {
+        from: '0x3d2fA460d3667D9d257cb066C8e77925a03C3c30' // Reemplaza '0xYourAddressHere' con tu dirección Ethereum válida
+    };
+
+    calculatorContract.methods.multiply(number1, number2).send(options)
+        .then(() => {
+            document.getElementById('result').textContent = 'Multiplication successful';
+        })
+        .catch((error) => {
+            document.getElementById('error').textContent = 'Error: ' + error.message;
+        });
+}
+
+function divide() {
+    const number1 = parseInt(document.getElementById('number1').value);
+    const number2 = parseInt(document.getElementById('number2').value);
+
+    const options = {
+        from: '0x847AA6f9F192d95FC57914D7a9b27d627D4B7654' // Reemplaza '0xYourAddressHere' con tu dirección Ethereum válida
+    };
+
+    calculatorContract.methods.divide(number1, number2).send(options)
+        .then(() => {
+            document.getElementById('result').textContent = 'Division successful';
+        })
+        .catch((error) => {
+            document.getElementById('error').textContent = 'Error: ' + error.message;
+        });
+}
