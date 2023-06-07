@@ -76,8 +76,22 @@ const contractAbi = [
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getResult",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
     }
 ];
+
 
 // Crea una instancia de Web3
 const web3 = new Web3('http://127.0.0.1:7545');
@@ -94,7 +108,13 @@ function add() {
 
     calculatorContract.methods.add(number1, number2).send(options)
         .then(() => {
-            document.getElementById('result').textContent = 'Suma exitosa';
+            calculatorContract.methods.getResult().call()
+                .then((result) => {
+                    document.getElementById('result').textContent = 'Suma exitosa. Resultado: ' + result;
+                })
+                .catch((error) => {
+                    document.getElementById('error').textContent = 'Error: ' + error.message;
+                });
         })
         .catch((error) => {
             document.getElementById('error').textContent = 'Error: ' + error.message;
@@ -111,7 +131,13 @@ function subtract() {
 
     calculatorContract.methods.subtract(number1, number2).send(options)
         .then(() => {
-            document.getElementById('result').textContent = 'Resta exitosa';
+            calculatorContract.methods.getResult().call()
+                .then((result) => {
+                    document.getElementById('result').textContent = 'Resta exitosa. Resultado: ' + result;
+                })
+                .catch((error) => {
+                    document.getElementById('error').textContent = 'Error: ' + error.message;
+                });
         })
         .catch((error) => {
             document.getElementById('error').textContent = 'Error: ' + error.message;
@@ -128,7 +154,13 @@ function multiply() {
 
     calculatorContract.methods.multiply(number1, number2).send(options)
         .then(() => {
-            document.getElementById('result').textContent = 'Multiplicacion Exitosa';
+            calculatorContract.methods.getResult().call()
+                .then((result) => {
+                    document.getElementById('result').textContent = 'Multiplicación exitosa. Resultado: ' + result;
+                })
+                .catch((error) => {
+                    document.getElementById('error').textContent = 'Error: ' + error.message;
+                });
         })
         .catch((error) => {
             document.getElementById('error').textContent = 'Error: ' + error.message;
@@ -145,7 +177,13 @@ function divide() {
 
     calculatorContract.methods.divide(number1, number2).send(options)
         .then(() => {
-            document.getElementById('result').textContent = 'Division exitosa';
+            calculatorContract.methods.getResult().call()
+                .then((result) => {
+                    document.getElementById('result').textContent = 'División exitosa. Resultado: ' + result;
+                })
+                .catch((error) => {
+                    document.getElementById('error').textContent = 'Error: ' + error.message;
+                });
         })
         .catch((error) => {
             document.getElementById('error').textContent = 'Error: ' + error.message;
